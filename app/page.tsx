@@ -3,6 +3,7 @@ import Link from "next/link"
 import WhitePaperSection from "@/components/white-paper-section"
 import FeatureCard from "@/components/feature-card"
 import GeometricShapes from "@/components/geometric-shapes"
+import { NebulaChatAgent } from "@/components/nebula-agent"
 import { Code, Shield, Zap, Users, Globe, Coins, ExternalLink, Copy } from "lucide-react"
 
 export default function Home() {
@@ -111,6 +112,16 @@ export default function Home() {
               description="Native DeFi protocols for lending, staking, and yield farming"
               icon={<Coins className="h-5 w-5 text-orange-400" />}
             />
+          </div>
+        </div>
+      </section>
+
+      {/* Shadow Agent AI Assistant section */}
+      <section className="relative z-10 py-16 px-4">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">AI Shadow Agent</h2>
+          <div className="max-w-4xl mx-auto">
+            <NebulaChatAgent />
           </div>
         </div>
       </section>

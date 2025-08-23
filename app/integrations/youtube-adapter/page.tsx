@@ -1,76 +1,9 @@
-"use client"
-
 import { Youtube, Info, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { useState, useEffect } from "react"
-
-interface YouTubeData {
-  totalViews: number
-  subscribers: number
-  videoCount: number
-  engagementRate: number
-  lastUpdated: string
-}
+import YouTubeAdapterDemo from "./demo"
 
 export default function YouTubeAdapterPage() {
-  const [youtubeData, setYoutubeData] = useState<YouTubeData | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [countdown, setCountdown] = useState(180) // 3 minutes
-
-  const fetchYouTubeData = async () => {
-    try {
-      setLoading(true)
-      const response = await fetch("/api/youtube")
-      if (!response.ok) {
-        throw new Error("Failed to fetch YouTube data")
-      }
-      const data = await response.json()
-      setYoutubeData(data)
-      setError(null)
-      setCountdown(180) // Reset countdown
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Unknown error")
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    fetchYouTubeData()
-  }, [])
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          fetchYouTubeData()
-          return 180
-        }
-        return prev - 1
-      })
-    }, 1000)
-
-    return () => clearInterval(timer)
-  }, [])
-
-  const formatNumber = (num: number) => {
-    if (num >= 1000000) {
-      return (num / 1000000).toFixed(1) + "M"
-    }
-    if (num >= 1000) {
-      return (num / 1000).toFixed(1) + "K"
-    }
-    return num.toString()
-  }
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60)
-    const secs = seconds % 60
-    return `${mins}m ${secs.toString().padStart(2, "0")}s`
-  }
-
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
       <div className="mb-12">
@@ -121,50 +54,37 @@ export default function YouTubeAdapterPage() {
             </div>
             <div className="flex items-center text-green-400 text-sm">
               <div className="h-2 w-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-              {loading ? "Loading..." : error ? "Error" : "Active"}
+              Active
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-black/40 p-4 rounded-lg border border-gray-700">
-              <div className="text-2xl font-bold text-white mb-1">
-                {loading ? "..." : error ? "Error" : formatNumber(youtubeData?.totalViews || 0)}
-              </div>
+              <div className="text-2xl font-bold text-white mb-1">847K</div>
               <div className="text-sm text-gray-400">Total Views</div>
-              <div className="text-xs text-green-400 mt-1">Live from YouTube API</div>
+              <div className="text-xs text-green-400 mt-1">+12.3% this month</div>
             </div>
             <div className="bg-black/40 p-4 rounded-lg border border-gray-700">
-              <div className="text-2xl font-bold text-white mb-1">
-                {loading ? "..." : error ? "Error" : formatNumber(youtubeData?.subscribers || 0)}
-              </div>
+              <div className="text-2xl font-bold text-white mb-1">23.4K</div>
               <div className="text-sm text-gray-400">Subscribers</div>
-              <div className="text-xs text-green-400 mt-1">Real-time data</div>
+              <div className="text-xs text-green-400 mt-1">+8.7% this month</div>
             </div>
             <div className="bg-black/40 p-4 rounded-lg border border-gray-700">
-              <div className="text-2xl font-bold text-white mb-1">
-                {loading ? "..." : error ? "Error" : `${youtubeData?.engagementRate || 0}%`}
-              </div>
+              <div className="text-2xl font-bold text-white mb-1">4.2%</div>
               <div className="text-sm text-gray-400">Engagement Rate</div>
-              <div className="text-xs text-blue-400 mt-1">Calculated live</div>
+              <div className="text-xs text-blue-400 mt-1">Above average</div>
             </div>
           </div>
 
           <div className="mt-4 p-3 bg-purple-900/30 rounded border border-purple-700">
             <div className="flex items-center justify-between">
               <span className="text-sm text-purple-200">Next Oracle Update:</span>
-              <span className="text-sm text-white font-mono">{formatTime(countdown)}</span>
+              <span className="text-sm text-white font-mono">2m 34s</span>
             </div>
           </div>
-
-          {error && (
-            <div className="mt-4 p-3 bg-red-900/30 rounded border border-red-700">
-              <p className="text-sm text-red-200">Error: {error}</p>
-              <p className="text-xs text-red-300 mt-1">
-                Make sure YOUTUBE_API_KEY and YOUTUBE_CHANNEL_ID are set in your environment variables.
-              </p>
-            </div>
-          )}
         </div>
+
+        <YouTubeAdapterDemo />
       </div>
 
       <div className="border border-gray-800 rounded-lg p-6 mb-12">
@@ -241,34 +161,6 @@ export default function YouTubeAdapterPage() {
                 </Button>
               </Link>
             </div>
-          </div>
-
-          <div className="bg-black/40 p-4 rounded-lg">
-            <h3 className="text-xl font-bold mb-3">Live Parameters</h3>
-            <table className="w-full text-sm text-gray-400">
-              <tbody>
-                <tr className="border-b border-gray-800">
-                  <td className="py-2 font-mono">Oracle Update Frequency</td>
-                  <td className="py-2">Every 3 minutes</td>
-                </tr>
-                <tr className="border-b border-gray-800">
-                  <td className="py-2 font-mono">Data Source</td>
-                  <td className="py-2">YouTube Data API v3</td>
-                </tr>
-                <tr className="border-b border-gray-800">
-                  <td className="py-2 font-mono">Network</td>
-                  <td className="py-2">Arbitrum Orbit (Layer 3)</td>
-                </tr>
-                <tr className="border-b border-gray-800">
-                  <td className="py-2 font-mono">Oracle Provider</td>
-                  <td className="py-2">Chainlink (Coming Soon)</td>
-                </tr>
-                <tr>
-                  <td className="py-2 font-mono">Node Infrastructure</td>
-                  <td className="py-2">TuB3 Network</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
@@ -357,25 +249,25 @@ export default function YouTubeAdapterPage() {
         </div>
 
         <div className="bg-black/40 p-4 rounded-lg mb-6">
-          <h3 className="font-bold mb-2">Production Network Requirements</h3>
+          <h3 className="font-bold mb-2">TuB3 Node Security Requirements</h3>
           <p className="text-sm text-gray-400 mb-4">
-            Our TuB3 node network ensures high-quality content and ecosystem security through these live requirements:
+            Our TuB3 node network ensures high-quality content and ecosystem security through these requirements:
           </p>
           <ul className="text-sm text-gray-400 list-disc pl-5 space-y-2">
             <li>
-              <strong>TuB3 Node Operation:</strong> Active validator nodes required for network participation
+              <strong>TuB3 Node Operation:</strong> All content creators must run TuB3 validator nodes to participate
             </li>
             <li>
-              <strong>Real-time Data Verification:</strong> All metrics verified through live YouTube API calls
+              <strong>Minimum TuB3 Stake:</strong> 2,000 TuB3 tokens must be staked to connect a channel
             </li>
             <li>
-              <strong>Chainlink Oracle Integration:</strong> Enterprise-grade oracle network for mainnet launch
+              <strong>Chainlink Oracle Verification:</strong> All metrics verified through Chainlink oracle network
             </li>
             <li>
               <strong>Encrypted Data Transmission:</strong> All metrics transmitted via secure, encrypted channels
             </li>
             <li>
-              <strong>Multi-Node Consensus:</strong> Distributed verification across TuB3 network infrastructure
+              <strong>Multi-Node Consensus:</strong> Multiple TuB3 nodes must verify metrics before rewards are issued
             </li>
           </ul>
         </div>
