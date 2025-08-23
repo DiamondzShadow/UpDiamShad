@@ -4,7 +4,6 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import Navbar from "@/components/navbar"
 import AnnouncementBanner from "@/components/announcement-banner"
-import TestnetDisclaimer from "@/components/testnet-disclaimer"
 import { ThirdwebProvider } from "thirdweb/react"
 import { createThirdwebClient } from "thirdweb"
 
@@ -30,7 +29,6 @@ export default function RootLayout({
       <body className={`${inter.className} bg-black text-white`}>
         <ThirdwebProvider client={client}>
           <AnnouncementBanner />
-          <TestnetDisclaimer />
           <Navbar />
           <main>{children}</main>
         </ThirdwebProvider>
