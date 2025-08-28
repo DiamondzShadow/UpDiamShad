@@ -4,14 +4,8 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import Navbar from "@/components/navbar"
 import AnnouncementBanner from "@/components/announcement-banner"
-import { ThirdwebProvider } from "thirdweb/react"
-import { createThirdwebClient } from "thirdweb"
 
 const inter = Inter({ subsets: ["latin"] })
-
-const client = createThirdwebClient({
-  clientId: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID || "",
-})
 
 export const metadata: Metadata = {
   title: "Diamondz Shadow | Web3 Technology",
@@ -27,11 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-black text-white`}>
-        <ThirdwebProvider client={client}>
-          <AnnouncementBanner />
-          <Navbar />
-          <main>{children}</main>
-        </ThirdwebProvider>
+        <AnnouncementBanner />
+        <Navbar />
+        <main>{children}</main>
       </body>
     </html>
   )
