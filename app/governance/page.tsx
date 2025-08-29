@@ -1,417 +1,187 @@
-import { Users, FileText, Check, ExternalLink, Vote, Clock, Shield, Info } from "lucide-react"
+import { ExternalLink, Vote, Shield, Pickaxe, TrendingUp, Music } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
 export default function GovernancePage() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
-      <div className="mb-12">
-        <h1 className="text-3xl font-bold mb-4">Governance</h1>
-        <p className="text-gray-400">On-chain governance system for the Diamondz Shadow ecosystem.</p>
-      </div>
-
-      <div className="border border-blue-800 bg-blue-950/30 rounded-lg p-4 mb-12">
-        <div className="flex flex-col md:flex-row">
-          <Info className="h-5 w-5 text-blue-400 mt-0.5 mr-3 flex-shrink-0 mb-2 md:mb-0" />
-          <div>
-            <h2 className="text-lg font-medium text-white mb-2">Governance Testnet Information</h2>
-            <p className="text-sm text-blue-200 mb-3">
-              The governance system is currently deployed on our testnet at address{" "}
-              <code className="bg-blue-900/50 px-1 py-0.5 rounded break-all text-xs">
-                0x336CC51bb9CDD5000C61F1a4569070327E39ba74
-              </code>
-              . While the contract is fully functional, the data displayed on this page includes mock proposals and
-              statistics for demonstration purposes.
-            </p>
-            <p className="text-sm text-blue-200">
-              At mainnet launch, this page will display live data directly from the blockchain, including:
-            </p>
-            <ul className="list-disc pl-5 mt-2 space-y-1 text-sm text-blue-200">
-              <li>Real-time governance parameters fetched from the contract</li>
-              <li>Actual proposals created by community members</li>
-              <li>Live voting statistics and proposal states</li>
-              <li>Accurate participation metrics and historical data</li>
-            </ul>
-            <div className="mt-4">
-              <Link
-                href="https://explorer-tdiamondz-chain-ilxp72z9o0.t.conduit.xyz/address/0x336CC51bb9CDD5000C61F1a4569070327E39ba74?tab=contract"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button className="bg-blue-800 hover:bg-blue-700 text-white rounded text-sm">
-                  <ExternalLink className="w-4 h-4 mr-2" />
-                  View Contract on Explorer
-                </Button>
-              </Link>
-            </div>
-          </div>
+      <div className="border border-yellow-800 bg-yellow-950/20 rounded-lg p-4 mb-8">
+        <div className="flex items-center">
+          <Shield className="h-5 w-5 text-yellow-400 mr-2" />
+          <span className="text-yellow-300 font-semibold">Testnet Environment</span>
         </div>
+        <p className="text-yellow-200 text-sm mt-2">
+          These contracts are deployed on Diamond zChain testnet for development and testing purposes.
+        </p>
       </div>
 
-      <div className="border border-gray-800 rounded-lg p-6 mb-12">
-        <h2 className="text-2xl font-bold mb-4">Governance Contract</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <p className="text-gray-400 mb-4">
-              The Diamondz Shadow governance system is powered by a VoteERC20 contract that enables token holders to
-              propose and vote on changes to the protocol.
-            </p>
-            <div className="space-y-3 mb-6">
-              <div className="flex flex-col sm:flex-row sm:justify-between border-b border-gray-800 pb-2">
-                <span className="text-gray-400">Contract Address:</span>
-                <a
-                  href="https://explorer-tdiamondz-chain-ilxp72z9o0.t.conduit.xyz/address/0x336CC51bb9CDD5000C61F1a4569070327E39ba74?tab=contract"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-mono text-primary hover:underline text-xs break-all"
-                >
-                  0x336CC51bb9CDD5000C61F1a4569070327E39ba74
-                </a>
-              </div>
-              <div className="flex justify-between border-b border-gray-800 pb-2">
-                <span className="text-gray-400">Contract Type:</span>
-                <span>VoteERC20</span>
-              </div>
-              <div className="flex justify-between border-b border-gray-800 pb-2">
-                <span className="text-gray-400">Voting Token:</span>
-                <span>SDM Token (ERC20)</span>
-              </div>
-              <div className="flex justify-between border-b border-gray-800 pb-2">
-                <span className="text-gray-400">Explorer:</span>
-                <a
-                  href="https://explorer-tdiamondz-chain-ilxp72z9o0.t.conduit.xyz"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline flex items-center"
-                >
-                  <span>Diamondz Explorer</span>
-                  <ExternalLink className="h-3 w-3 ml-1" />
-                </a>
-              </div>
-            </div>
-            <Link
-              href="https://explorer-tdiamondz-chain-ilxp72z9o0.t.conduit.xyz/address/0x336CC51bb9CDD5000C61F1a4569070327E39ba74?tab=contract"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button className="bg-gray-800 hover:bg-gray-700 text-white rounded">
-                <ExternalLink className="w-4 h-4 mr-2" />
-                View Contract on Explorer
-              </Button>
-            </Link>
-          </div>
+      <div className="mb-12">
+        <h1 className="text-3xl font-bold mb-4">DAO Governance</h1>
+        <p className="text-gray-400">
+          Purchase NFTs → Stake them → Earn governance tokens → Vote in DAO governance on Diamond zChain.
+        </p>
+      </div>
 
-          <div className="bg-black/40 p-4 rounded-lg">
-            <h3 className="font-bold mb-3">Governance Parameters</h3>
-            <div className="space-y-3">
-              <div className="flex justify-between border-b border-gray-800 pb-2">
-                <span className="text-gray-400">Voting Delay:</span>
-                <span className="font-mono">1 day (7200 blocks)</span>
-                {/* MOCK DATA: Will be fetched from contract using votingDelay() function */}
-              </div>
-              <div className="flex justify-between border-b border-gray-800 pb-2">
-                <span className="text-gray-400">Voting Period:</span>
-                <span className="font-mono">1 week (50400 blocks)</span>
-                {/* MOCK DATA: Will be fetched from contract using votingPeriod() function */}
-              </div>
-              <div className="flex justify-between border-b border-gray-800 pb-2">
-                <span className="text-gray-400">Proposal Threshold:</span>
-                <span className="font-mono">10,000 SDM</span>
-                {/* MOCK DATA: Will be fetched from contract using proposalThreshold() function */}
-              </div>
-              <div className="flex justify-between border-b border-gray-800 pb-2">
-                <span className="text-gray-400">Quorum:</span>
-                <span className="font-mono">10% of total supply</span>
-                {/* MOCK DATA: Will be fetched from contract using quorumNumerator() function */}
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-400">Implementation:</span>
-                <span className="font-mono">OpenZeppelin Governor</span>
-              </div>
+      <div className="border border-purple-800 bg-purple-950/20 rounded-lg p-6 mb-12">
+        <h2 className="text-2xl font-bold mb-4 text-purple-300">How DAO Participation Works</h2>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="text-center">
+            <div className="bg-green-800 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
+              <Music className="h-6 w-6 text-white" />
             </div>
+            <h3 className="font-bold mb-2">1. Purchase NFT</h3>
+            <p className="text-sm text-gray-400">Buy a Diamondz Digital Music NFT from the collection</p>
+          </div>
+          <div className="text-center">
+            <div className="bg-blue-800 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
+              <TrendingUp className="h-6 w-6 text-white" />
+            </div>
+            <h3 className="font-bold mb-2">2. Stake NFT</h3>
+            <p className="text-sm text-gray-400">Stake your NFT in the Diamond zChain Stakes contract</p>
+          </div>
+          <div className="text-center">
+            <div className="bg-purple-800 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
+              <Pickaxe className="h-6 w-6 text-white" />
+            </div>
+            <h3 className="font-bold mb-2">3. Earn Tokens</h3>
+            <p className="text-sm text-gray-400">Receive governance tokens from the Mine contract</p>
+          </div>
+          <div className="text-center">
+            <div className="bg-yellow-800 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
+              <Vote className="h-6 w-6 text-white" />
+            </div>
+            <h3 className="font-bold mb-2">4. Vote in DAO</h3>
+            <p className="text-sm text-gray-400">Use governance tokens to vote on proposals</p>
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        <div className="border border-gray-800 rounded-lg p-6">
-          <Users className="h-8 w-8 text-gray-400 mb-4" />
-          <h2 className="text-xl font-bold mb-2">Token-Based Voting</h2>
+        <div className="border border-green-800 bg-green-950/30 rounded-lg p-6">
+          <Music className="h-8 w-8 text-green-400 mb-4" />
+          <h2 className="text-xl font-bold mb-2">Diamondz Digital Music</h2>
           <p className="text-gray-400 text-sm mb-4">
-            SDM token holders vote on proposals with voting power proportional to their token holdings.
+            Purchase music NFTs to gain access to DAO governance through staking.
           </p>
-          <div className="bg-black/40 p-3 rounded-md">
-            <pre className="text-xs text-gray-300 overflow-x-auto">
-              <code>{`// Voting Power Calculation
-votingPower = sqrt(tokenBalance)
-
-// Quadratic voting reduces plutocracy
-// while maintaining stake-based influence`}</code>
-            </pre>
+          <div className="bg-black/40 p-3 rounded-md mb-4">
+            <div className="text-xs text-gray-500 mb-1">Contract Address</div>
+            <div className="font-mono text-xs break-all text-green-300">0x37FFAd37b84d099afb43B6E01038843f26cD9F05</div>
           </div>
+          <Link
+            href="https://thirdweb.com/diamond-zchain/0x37FFAd37b84d099afb43B6E01038843f26cD9F05"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button className="bg-green-800 hover:bg-green-700 text-white rounded text-sm w-full">
+              <ExternalLink className="w-4 h-4 mr-2" />
+              View on ThirdWeb
+            </Button>
+          </Link>
         </div>
 
-        <div className="border border-gray-800 rounded-lg p-6">
-          <FileText className="h-8 w-8 text-gray-400 mb-4" />
-          <h2 className="text-xl font-bold mb-2">Proposal System</h2>
-          <p className="text-gray-400 text-sm mb-4">
-            Formal on-chain proposal system for protocol changes, funding allocations, and production decisions.
-          </p>
-          <ul className="text-xs text-gray-400 list-disc pl-5 space-y-1">
-            <li>Minimum 10,000 SDM to submit proposal</li>
-            <li>1-day voting delay after submission</li>
-            <li>1-week voting period</li>
-            <li>Quorum requirement: 10% of circulating supply</li>
-            <li>Majority threshold: 50% approval</li>
-          </ul>
+        <div className="border border-blue-800 bg-blue-950/30 rounded-lg p-6">
+          <TrendingUp className="h-8 w-8 text-blue-400 mb-4" />
+          <h2 className="text-xl font-bold mb-2">Diamond zChain Stakes</h2>
+          <p className="text-gray-400 text-sm mb-4">Stake your music NFTs to earn governance tokens continuously.</p>
+          <div className="bg-black/40 p-3 rounded-md mb-4">
+            <div className="text-xs text-gray-500 mb-1">Contract Address</div>
+            <div className="font-mono text-xs break-all text-blue-300">0xBD20960E95673Ff7de09B47cB33581ED2CDc63a9</div>
+          </div>
+          <Link
+            href="https://thirdweb.com/diamond-zchain/0xBD20960E95673Ff7de09B47cB33581ED2CDc63a9"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button className="bg-blue-800 hover:bg-blue-700 text-white rounded text-sm w-full">
+              <ExternalLink className="w-4 h-4 mr-2" />
+              View on ThirdWeb
+            </Button>
+          </Link>
         </div>
 
-        <div className="border border-gray-800 rounded-lg p-6">
-          <Check className="h-8 w-8 text-gray-400 mb-4" />
-          <h2 className="text-xl font-bold mb-2">Execution</h2>
+        <div className="border border-purple-800 bg-purple-950/30 rounded-lg p-6">
+          <Pickaxe className="h-8 w-8 text-purple-400 mb-4" />
+          <h2 className="text-xl font-bold mb-2">DAO isLab Diamondz Mine</h2>
           <p className="text-gray-400 text-sm mb-4">
-            Approved proposals are automatically executed through the governance contract.
+            Distributes governance tokens to NFT stakers based on contribution.
           </p>
-          <ul className="text-xs text-gray-400 list-disc pl-5 space-y-1">
-            <li>Transparent execution tracking</li>
-            <li>On-chain execution history</li>
-            <li>Multi-signature security</li>
-            <li>Timelock for critical changes</li>
-          </ul>
+          <div className="bg-black/40 p-3 rounded-md mb-4">
+            <div className="text-xs text-gray-500 mb-1">Contract Address</div>
+            <div className="font-mono text-xs break-all text-purple-300">
+              0x9d89BCbd1d81413a8f6b15d7aBF8508A8a0F92a6
+            </div>
+          </div>
+          <Link
+            href="https://thirdweb.com/diamond-zchain/0x9d89BCbd1d81413a8f6b15d7aBF8508A8a0F92a6"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button className="bg-purple-800 hover:bg-purple-700 text-white rounded text-sm w-full">
+              <ExternalLink className="w-4 h-4 mr-2" />
+              View on ThirdWeb
+            </Button>
+          </Link>
         </div>
       </div>
 
-      <div className="mb-12">
-        <h2 className="text-2xl font-bold mb-6">Active Proposals</h2>
-        {/* MOCK DATA: This entire table will be populated with live data from getAllProposals() */}
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm text-left text-gray-400">
-            <thead className="text-xs uppercase bg-gray-900 text-gray-400">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  ID
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Title
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Type
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Proposer
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Votes For
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Votes Against
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Status
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="border-b border-gray-800">
-                <td className="px-6 py-4 font-mono">DSP-007</td>
-                <td className="px-6 py-4">Increase Production Budget Cap</td>
-                <td className="px-6 py-4">Parameter</td>
-                <td className="px-6 py-4 font-mono text-xs">0x7a...3f4d</td>
-                <td className="px-6 py-4">62%</td>
-                <td className="px-6 py-4">38%</td>
-                <td className="px-6 py-4">
-                  <span className="bg-green-900/20 text-green-500 px-2 py-1 rounded text-xs">Active</span>
-                </td>
-                <td className="px-6 py-4">
-                  <div className="flex space-x-2">
-                    <Link href="/governance/voting">
-                      <Button variant="outline" size="sm" className="h-7 px-2 rounded-sm">
-                        <ExternalLink className="h-3 w-3 mr-1" />
-                        View
-                      </Button>
-                    </Link>
-                  </div>
-                </td>
-              </tr>
-              <tr className="border-b border-gray-800">
-                <td className="px-6 py-4 font-mono">DSP-008</td>
-                <td className="px-6 py-4">Add New Revenue Stream Integration</td>
-                <td className="px-6 py-4">Integration</td>
-                <td className="px-6 py-4 font-mono text-xs">0x3b...9e2a</td>
-                <td className="px-6 py-4">78%</td>
-                <td className="px-6 py-4">22%</td>
-                <td className="px-6 py-4">
-                  <span className="bg-green-900/20 text-green-500 px-2 py-1 rounded text-xs">Active</span>
-                </td>
-                <td className="px-6 py-4">
-                  <div className="flex space-x-2">
-                    <Link href="/governance/voting">
-                      <Button variant="outline" size="sm" className="h-7 px-2 rounded-sm">
-                        <ExternalLink className="h-3 w-3 mr-1" />
-                        View
-                      </Button>
-                    </Link>
-                  </div>
-                </td>
-              </tr>
-              <tr className="border-b border-gray-800">
-                <td className="px-6 py-4 font-mono">DSP-009</td>
-                <td className="px-6 py-4">Modify Contribution Score Algorithm</td>
-                <td className="px-6 py-4">Protocol</td>
-                <td className="px-6 py-4 font-mono text-xs">0xf1...5c8b</td>
-                <td className="px-6 py-4">45%</td>
-                <td className="px-6 py-4">55%</td>
-                <td className="px-6 py-4">
-                  <span className="bg-green-900/20 text-green-500 px-2 py-1 rounded text-xs">Active</span>
-                </td>
-                <td className="px-6 py-4">
-                  <div className="flex space-x-2">
-                    <Link href="/governance/voting">
-                      <Button variant="outline" size="sm" className="h-7 px-2 rounded-sm">
-                        <ExternalLink className="h-3 w-3 mr-1" />
-                        View
-                      </Button>
-                    </Link>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="border border-gray-800 rounded-lg p-6">
-          <h2 className="text-xl font-bold mb-4">VoteERC20 Contract</h2>
-          <pre className="text-xs text-gray-300 overflow-x-auto bg-black p-3 rounded-md">
-            <code>{`// SPDX-License-Identifier: Apache-2.0
-pragma solidity ^0.8.11;
-
-contract VoteERC20 is
-  Initializable,
-  IThirdwebContract,
-  ERC2771ContextUpgradeable,
-  GovernorUpgradeable,
-  GovernorSettingsUpgradeable,
-  GovernorCountingSimpleUpgradeable,
-  GovernorVotesUpgradeable,
-  GovernorVotesQuorumFractionUpgradeable
-{
-  // Proposal structure
-  struct Proposal {
-      uint256 proposalId;
-      address proposer;
-      address[] targets;
-      uint256[] values;
-      string[] signatures;
-      bytes[] calldatas;
-      uint256 startBlock;
-      uint256 endBlock;
-      string description;
-  }
-
-  // Create a proposal
-  function propose(
-      address[] memory targets,
-      uint256[] memory values,
-      bytes[] memory calldatas,
-      string memory description
-  ) public virtual override returns (uint256 proposalId) {
-      // Implementation details...
-  }
-
-  // Get all proposals
-  function getAllProposals() external view returns (Proposal[] memory) {
-      // Implementation details...
-  }
-}`}</code>
-          </pre>
-        </div>
-
-        <div>
-          <div className="border border-gray-800 rounded-lg p-6 mb-6">
-            <h2 className="text-xl font-bold mb-4">How Governance Works</h2>
-            <div className="space-y-4">
-              <div className="flex items-start">
-                <div className="h-8 w-8 rounded-full bg-gray-800 flex items-center justify-center mr-3 mt-0.5">
-                  <Vote className="h-4 w-4 text-gray-400" />
-                </div>
-                <div>
-                  <h3 className="font-bold mb-1">Proposal Creation</h3>
-                  <p className="text-sm text-gray-400">
-                    Any token holder with at least 10,000 SDM can create a proposal by calling the propose() function
-                    with targets, values, calldatas, and a description.
-                  </p>
-                </div>
+      <div className="border border-gray-800 rounded-lg p-6 mb-12">
+        <h2 className="text-2xl font-bold mb-4">Live DAO Infrastructure</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <p className="text-gray-400 mb-4">
+              The Diamondz Shadow DAO operates through three interconnected smart contracts on Diamond zChain testnet,
+              enabling NFT-based governance where music NFT holders stake their assets to earn governance tokens.
+            </p>
+            <div className="space-y-3 mb-6">
+              <div className="flex flex-col sm:flex-row sm:justify-between border-b border-gray-800 pb-2">
+                <span className="text-gray-400">Network:</span>
+                <span className="text-primary">Diamond zChain (Chain ID: 150179125)</span>
               </div>
-
-              <div className="flex items-start">
-                <div className="h-8 w-8 rounded-full bg-gray-800 flex items-center justify-center mr-3 mt-0.5">
-                  <Clock className="h-4 w-4 text-gray-400" />
-                </div>
-                <div>
-                  <h3 className="font-bold mb-1">Voting Period</h3>
-                  <p className="text-sm text-gray-400">
-                    After a 1-day delay, voting begins and remains open for 1 week. Token holders can vote for, against,
-                    or abstain.
-                  </p>
-                </div>
+              <div className="flex justify-between border-b border-gray-800 pb-2">
+                <span className="text-gray-400">Environment:</span>
+                <span>Testnet</span>
               </div>
-
-              <div className="flex items-start">
-                <div className="h-8 w-8 rounded-full bg-gray-800 flex items-center justify-center mr-3 mt-0.5">
-                  <Check className="h-4 w-4 text-gray-400" />
-                </div>
-                <div>
-                  <h3 className="font-bold mb-1">Execution</h3>
-                  <p className="text-sm text-gray-400">
-                    If the proposal passes (majority approval and quorum reached), it can be executed on-chain to
-                    implement the changes.
-                  </p>
-                </div>
+              <div className="flex justify-between border-b border-gray-800 pb-2">
+                <span className="text-gray-400">Active Contracts:</span>
+                <span>3 Live Contracts</span>
               </div>
-
-              <div className="flex items-start">
-                <div className="h-8 w-8 rounded-full bg-gray-800 flex items-center justify-center mr-3 mt-0.5">
-                  <Shield className="h-4 w-4 text-gray-400" />
-                </div>
-                <div>
-                  <h3 className="font-bold mb-1">Security</h3>
-                  <p className="text-sm text-gray-400">
-                    The governance contract is based on OpenZeppelin's secure and audited Governor contracts, with
-                    additional security measures.
-                  </p>
-                </div>
+              <div className="flex justify-between border-b border-gray-800 pb-2">
+                <span className="text-gray-400">Explorer:</span>
+                <a
+                  href="https://thirdweb.com/diamond-zchain"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline flex items-center"
+                >
+                  <span>ThirdWeb Explorer</span>
+                  <ExternalLink className="h-3 w-3 ml-1" />
+                </a>
               </div>
             </div>
           </div>
 
-          <div className="border border-gray-800 rounded-lg p-6">
-            <h2 className="text-xl font-bold mb-4">Governance Statistics</h2>
-            {/* MOCK DATA: These statistics will be calculated from on-chain data */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-black/40 p-3 rounded-md">
-                <div className="text-xs text-gray-500 mb-1">Total Proposals</div>
-                <div className="text-xl font-bold">42</div>
-                {/* Will be calculated from getAllProposals().length */}
+          <div className="bg-black/40 p-4 rounded-lg">
+            <h3 className="font-bold mb-3">Contract Features</h3>
+            <div className="space-y-3">
+              <div className="flex justify-between border-b border-gray-800 pb-2">
+                <span className="text-gray-400">Mining Rewards:</span>
+                <span className="font-mono text-purple-300">Active</span>
               </div>
-              <div className="bg-black/40 p-3 rounded-md">
-                <div className="text-xs text-gray-500 mb-1">Participation Rate</div>
-                <div className="text-xl font-bold">38.5%</div>
-                {/* Will be calculated from voting data across all proposals */}
+              <div className="flex justify-between border-b border-gray-800 pb-2">
+                <span className="text-gray-400">NFT Staking:</span>
+                <span className="font-mono text-blue-300">Live</span>
               </div>
-              <div className="bg-black/40 p-3 rounded-md">
-                <div className="text-xs text-gray-500 mb-1">Proposals Passed</div>
-                <div className="text-xl font-bold">31</div>
-                {/* Will be calculated by filtering proposals by state */}
+              <div className="flex justify-between border-b border-gray-800 pb-2">
+                <span className="text-gray-400">Music NFTs:</span>
+                <span className="font-mono text-green-300">Deployed</span>
               </div>
-              <div className="bg-black/40 p-3 rounded-md">
-                <div className="text-xs text-gray-500 mb-1">Proposals Rejected</div>
-                <div className="text-xl font-bold">11</div>
-                {/* Will be calculated by filtering proposals by state */}
+              <div className="flex justify-between border-b border-gray-800 pb-2">
+                <span className="text-gray-400">Framework:</span>
+                <span className="font-mono">ThirdWeb</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-400">Status:</span>
+                <span className="font-mono text-yellow-300">Testnet</span>
               </div>
             </div>
           </div>
@@ -420,14 +190,16 @@ contract VoteERC20 is
 
       <div className="mt-12 text-center">
         <p className="text-gray-400 mb-6">
-          Learn more about our governance voting system and token delegation process.
+          Explore the testnet DAO contracts on Diamond zChain and participate in the NFT-based governance system.
         </p>
-        <Link href="/governance/voting">
-          <Button className="bg-primary hover:bg-primary/90 text-white rounded-full">
-            <Vote className="w-4 h-4 mr-2" />
-            Voting System Details
-          </Button>
-        </Link>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link href="https://thirdweb.com/diamond-zchain" target="_blank" rel="noopener noreferrer">
+            <Button className="bg-primary hover:bg-primary/90 text-white rounded-full">
+              <ExternalLink className="w-4 h-4 mr-2" />
+              View All Contracts
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   )
