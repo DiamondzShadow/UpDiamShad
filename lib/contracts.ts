@@ -6,7 +6,7 @@ export const diamondZChain = defineChain(150179125)
 
 // Create the ThirdWeb client
 export const client = createThirdwebClient({
-  clientId: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID!,
+  clientId: "5a25f41eddec1fb56418abe1ecef5dc2",
 })
 
 // Contract addresses on Diamond zChain

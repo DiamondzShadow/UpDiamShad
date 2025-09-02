@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import Navbar from "@/components/navbar"
 import AnnouncementBanner from "@/components/announcement-banner"
+import { ThirdwebProvider } from "thirdweb/react"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -23,7 +24,9 @@ export default function RootLayout({
       <body className={`${inter.className} bg-black text-white`}>
         <AnnouncementBanner />
         <Navbar />
-        <main>{children}</main>
+        <ThirdwebProvider>
+          <main>{children}</main>
+        </ThirdwebProvider>
       </body>
     </html>
   )

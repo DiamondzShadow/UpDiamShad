@@ -25,9 +25,6 @@ export default function Navbar() {
             </Link>
 
             <div className="hidden md:ml-10 md:flex md:space-x-6">
-              <Link href="/ecosystem" className="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">
-                Architecture
-              </Link>
               <Link href="/movies" className="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">
                 Productions
               </Link>
@@ -66,9 +63,6 @@ export default function Navbar() {
       {isMenuOpen && (
         <div className="md:hidden bg-black border-t border-gray-800">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link href="/ecosystem" className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">
-              Architecture
-            </Link>
             <Link href="/movies" className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">
               Productions
             </Link>
