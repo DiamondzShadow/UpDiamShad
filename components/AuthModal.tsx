@@ -55,7 +55,7 @@ export function AuthModal() {
             <div className="space-y-3">
               <Button
                 onClick={() => setAuthFlow("signup")}
-                className="w-full bg-white text-black hover:bg-gray-200"
+                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
                 size="lg"
               >
                 <UserPlus className="h-5 w-5 mr-2" />

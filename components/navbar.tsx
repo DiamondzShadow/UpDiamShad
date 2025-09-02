@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import {
   Menu,
   X,
@@ -13,14 +14,20 @@ import {
   Settings,
   Trophy,
   Wallet,
+  Loader2,
 } from "lucide-react";
 import { ConnectButton } from "thirdweb/react";
 import { client } from "@/lib/contracts";
 import { useAuth } from "@/hooks/useAuth";
 import { formatUserDisplayName, getUserVerificationBadge } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+} from "@/components/ui/dialog";
 
 export default function Navbar() {
+  const router = useRouter();
   const {
     user,
     isAuthenticated,
@@ -30,20 +37,35 @@ export default function Navbar() {
   } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isDashboardLoading, setIsDashboardLoading] = useState(false);
 
   // Manage body scroll when user menu is open
   useEffect(() => {
     if (isUserMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
-    
+
     // Cleanup function
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [isUserMenuOpen]);
+
+  const handleDashboardNavigation = async () => {
+    setIsDashboardLoading(true);
+    setIsUserMenuOpen(false);
+    
+    try {
+      await router.push('/dashboard');
+    } finally {
+      // Keep loading for a brief moment to show the modal
+      setTimeout(() => {
+        setIsDashboardLoading(false);
+      }, 500);
+    }
+  };
 
   return (
     <nav className="bg-black/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-800 w-full">
@@ -132,14 +154,13 @@ export default function Navbar() {
                             {user.email}
                           </p>
                         </div>
-                        <Link
-                          href="/dashboard"
-                          className="flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-800"
-                          onClick={() => setIsUserMenuOpen(false)}
+                        <button
+                          onClick={handleDashboardNavigation}
+                          className="flex items-center w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-800"
                         >
                           <User className="h-4 w-4 mr-2" />
                           Dashboard
-                        </Link>
+                        </button>
                         <button
                           onClick={() => {
                             setIsWalletManagerOpen(true);
@@ -225,7 +246,10 @@ export default function Navbar() {
             >
               NFTs
             </Link>
-            <Link href="/governance" className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">
+            <Link
+              href="/governance"
+              className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium"
+            >
               Governance
             </Link>
             <Link
@@ -237,7 +261,9 @@ export default function Navbar() {
 
             {/* Blockchain section in mobile menu */}
             <div className="border-t border-gray-800 pt-2 mt-2">
-              <div className="text-gray-500 px-3 py-1 text-xs uppercase font-bold">Blockchain</div>
+              <div className="text-gray-500 px-3 py-1 text-xs uppercase font-bold">
+                Blockchain
+              </div>
               <Link
                 href="/blockchain/contracts"
                 className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium pl-6"
@@ -258,20 +284,32 @@ export default function Navbar() {
               </Link>
             </div>
 
-              <div className="flex items-center space-x-4 px-3 pt-3">
-                <Link
-                  href="https://github.com/DiamondzShadow"
-                  className="text-gray-400 hover:text-white"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Github className="h-5 w-5" />
-                </Link>
-              </div>
+            <div className="flex items-center space-x-4 px-3 pt-3">
+              <Link
+                href="https://github.com/DiamondzShadow"
+                className="text-gray-400 hover:text-white"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github className="h-5 w-5" />
+              </Link>
             </div>
           </div>
         </div>
       )}
+
+      {/* Dashboard Loading Modal */}
+      <Dialog open={isDashboardLoading} onOpenChange={() => {}}>
+        <DialogContent className="bg-black border-gray-800 text-white max-w-sm">
+          <div className="flex flex-col items-center justify-center py-8">
+            <Loader2 className="h-12 w-12 text-purple-400 animate-spin mb-4" />
+            <h3 className="text-lg font-semibold mb-2">Loading Dashboard</h3>
+            <p className="text-gray-400 text-center text-sm">
+              Preparing your creator experience...
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
     </nav>
   );
 }
