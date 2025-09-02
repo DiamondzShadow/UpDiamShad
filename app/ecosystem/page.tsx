@@ -280,7 +280,7 @@ contract zsLabToken is ERC20, Ownable {
                   <td className="py-2 font-mono">Explorer</td>
                   <td className="py-2">
                     <a
-                      href="https://diamondz-zslab-testnet.tryethernal.com/"
+                      href="https://diamondz-zslab-testnet.tryethernal.com/overview"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-400 hover:underline"

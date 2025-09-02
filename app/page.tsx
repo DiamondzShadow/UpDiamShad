@@ -318,7 +318,7 @@ export default function Home() {
                 </li>
                 <li>
                   <a
-                    href="https://explorer-tdiamondz-chain-ilxp72z9o0.t.conduit.xyz"
+                    href="https://diamondz-zslab-testnet.tryethernal.com/overview"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-white transition-colors"

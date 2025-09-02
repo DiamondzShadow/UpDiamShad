@@ -91,7 +91,7 @@ export default function JoinCommunity() {
                 </ul>
                 <Button
                   className="w-full bg-green-600 hover:bg-green-700"
-                  onClick={() => window.open("https://github.com/diamondz-chain/docs", "_blank")}
+                  onClick={() => window.open("https://thirdweb.com/diamond-zchain", "_blank")}
                 >
                   Launch on Diamondz <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
