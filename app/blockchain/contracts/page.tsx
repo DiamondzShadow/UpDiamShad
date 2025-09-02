@@ -246,12 +246,12 @@ export default function ContractsPage() {
               <div>
                 <span className="text-gray-400">Dashboard URL:</span>
                 <a
-                  href="https://diamondzshadowscan.net"
+                  href="https://diamondz-zslab-testnet.tryethernal.com/overview"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:underline ml-2"
                 >
-                  diamondzshadowscan.net
+                  diamondz-zslab-testnet.tryethernal.com
                 </a>
               </div>
             </div>

@@ -86,12 +86,6 @@ export default function Navbar() {
               >
                 Creators
               </Link>
-              <Link
-                href="/developers"
-                className="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium"
-              >
-                Developers
-              </Link>
             </div>
           </div>
 
@@ -231,79 +225,38 @@ export default function Navbar() {
             >
               NFTs
             </Link>
+            <Link href="/governance" className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">
+              Governance
+            </Link>
             <Link
               href="/creators"
               className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium"
             >
               Creators
             </Link>
-            <Link
-              href="/developers"
-              className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium"
-            >
-              Developers
-            </Link>
 
-            <div className="border-t border-gray-800 pt-4 px-3">
-              {/* Mobile Authentication */}
-              {isAuthenticated && user ? (
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-3 px-3 py-2 bg-gray-800 rounded-lg">
-                    <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-                      {formatUserDisplayName(user).charAt(0).toUpperCase()}
-                    </div>
-                    <div>
-                      <div className="text-white font-medium flex items-center gap-1">
-                        {formatUserDisplayName(user)}
-                        <span>
-                          {getUserVerificationBadge(user.verificationLevel)}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="space-y-1">
-                    <Link
-                      href="/profile"
-                      className="flex items-center px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded"
-                    >
-                      <User className="h-4 w-4 mr-3" />
-                      Profile
-                    </Link>
-                    <button
-                      onClick={() => setIsWalletManagerOpen(true)}
-                      className="flex items-center w-full px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded"
-                    >
-                      <Wallet className="h-4 w-4 mr-3" />
-                      Wallet Manager
-                    </button>
-                    <Link
-                      href="/settings"
-                      className="flex items-center px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded"
-                    >
-                      <Settings className="h-4 w-4 mr-3" />
-                      Settings
-                    </Link>
-                    <button
-                      onClick={logout}
-                      className="flex items-center w-full px-3 py-2 text-red-400 hover:bg-gray-800 rounded"
-                    >
-                      <LogOut className="h-4 w-4 mr-3" />
-                      Sign out
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  <Button
-                    onClick={() => setIsAuthModalOpen(true)}
-                    variant="outline"
-                    className="w-full border-gray-600 text-white hover:bg-gray-800"
-                  >
-                    <User className="h-4 w-4 mr-2" />
-                    Get Started
-                  </Button>
-                </div>
-              )}
+            {/* Blockchain section in mobile menu */}
+            <div className="border-t border-gray-800 pt-2 mt-2">
+              <div className="text-gray-500 px-3 py-1 text-xs uppercase font-bold">Blockchain</div>
+              <Link
+                href="/blockchain/contracts"
+                className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium pl-6"
+              >
+                Contract Details
+              </Link>
+              <Link
+                href="/blockchain/interact"
+                className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium pl-6"
+              >
+                Interact with Contracts
+              </Link>
+              <Link
+                href="/integrations/youtube-adapter"
+                className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium pl-6"
+              >
+                YouTube Adapter
+              </Link>
+            </div>
 
               <div className="flex items-center space-x-4 px-3 pt-3">
                 <Link

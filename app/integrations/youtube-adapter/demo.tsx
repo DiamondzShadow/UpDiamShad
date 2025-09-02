@@ -132,7 +132,7 @@ export default function YouTubeAdapterDemo() {
 
           <div className="mt-6 flex justify-center">
             <Link href="/blockchain/contracts">
-              <Button variant="outline" size="sm" className="mr-2">
+              <Button variant="outline" size="sm" className="mr-2 bg-transparent">
                 <ExternalLink className="w-3 h-3 mr-2" />
                 View Contract Details
               </Button>
@@ -141,7 +141,7 @@ export default function YouTubeAdapterDemo() {
               variant="outline"
               size="sm"
               onClick={() => {
-                window.open("https://diamondzshadowscan.net", "_blank")
+                window.open("https://diamondz-zslab-testnet.tryethernal.com/overview", "_blank")
               }}
             >
               <ExternalLink className="w-3 h-3 mr-2" />
