@@ -1,44 +1,53 @@
 "use client"
 
-import { Globe, RefreshCw, AlertTriangle } from "lucide-react"
+import { Globe, RefreshCw, AlertTriangle, Wallet, ExternalLink } from "lucide-react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 
-const mockNFTs = [
+const nftCollections = [
   {
     id: "1",
     name: "Diamond Beat #001",
-    description: "Exclusive music NFT from Diamondz Digital Music collection",
+    description: "Exclusive music NFT from Diamondz Digital Music collection - stakeable for DAO tokens",
     image: "/placeholder.svg?height=300&width=300&text=Diamond+Beat+001",
     price: "0.1 ETH",
     creator: "DiamondBeats",
     collection: "Diamondz Digital Music",
+    contract: "0x37FFAd37b84d099afb43B6E01038843f26cD9F05",
+    marketplaceUrl: "https://thirdweb.com/diamond-zchain/0x37FFAd37b84d099afb43B6E01038843f26cD9F05",
+    stakeable: true,
   },
   {
     id: "2",
     name: "Scam Hunter Badge",
-    description: "Rare achievement badge from Scam Mercenaries game",
+    description: "Rare achievement badge from Scam Mercenaries game - unlocks special abilities",
     image: "/placeholder.svg?height=300&width=300&text=Scam+Hunter+Badge",
     price: "0.05 ETH",
     creator: "ScamMercs",
     collection: "Game Achievements",
+    contract: "0x9d89BCbd1d81413a8f6b15d7aBF8508A8a0F92a6",
+    marketplaceUrl: "https://thirdweb.com/diamond-zchain",
+    stakeable: false,
   },
   {
     id: "3",
     name: "40ac Property Token",
-    description: "Real estate tokenization from 40ac RWA platform",
+    description: "Real estate tokenization from 40ac RWA platform - represents actual property ownership",
     image: "/placeholder.svg?height=300&width=300&text=40ac+Property",
     price: "1.5 ETH",
     creator: "40acRWA",
     collection: "Real Estate",
+    contract: "0xBD20960E95673Ff7de09B47cB33581ED2CDc63a9",
+    marketplaceUrl: "https://thirdweb.com/diamond-zchain",
+    stakeable: false,
   },
 ]
 
-export default function NftGalleryPage() {
-  const [nfts, setNfts] = useState(mockNFTs)
+export default function NftMarketplacePage() {
+  const [nfts, setNfts] = useState(nftCollections)
   const [isLoading, setIsLoading] = useState(false)
   const [activeTab, setActiveTab] = useState("browse")
 
@@ -49,9 +58,19 @@ export default function NftGalleryPage() {
     }, 1000)
   }
 
+  const handleViewOnMarketplace = (marketplaceUrl: string) => {
+    window.open(marketplaceUrl, "_blank")
+  }
+
+  const handleStakeNFT = (nftId: string) => {
+    // Redirect to governance page for staking
+    window.location.href = "/governance"
+  }
+
   const tabs = [
     { id: "browse", label: "Browse NFTs", icon: "🛒" },
     { id: "collections", label: "Collections", icon: "🎨" },
+    { id: "staking", label: "Staking", icon: "💎" },
     { id: "about", label: "About", icon: "📝" },
   ]
 
@@ -60,9 +79,10 @@ export default function NftGalleryPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
-          <h1 className="text-3xl font-bold mb-2 text-white">NFT Showcase</h1>
+          <h1 className="text-3xl font-bold mb-2 text-white">NFT Marketplace</h1>
           <p className="text-gray-300">
-            Explore exclusive NFTs from the Diamondz ecosystem including music, gaming, and RWA collections.
+            Buy, stake, and trade exclusive NFTs from the Diamondz ecosystem. Music NFTs can be staked for DAO
+            governance tokens.
           </p>
           <p className="text-sm text-gray-400 mt-2">Featured collections: {nfts.length} items</p>
         </div>
@@ -78,7 +98,7 @@ export default function NftGalleryPage() {
           </Button>
           <div className="flex items-center gap-2 text-sm text-gray-300 border border-gray-600 rounded-full px-4 py-2">
             <Globe className="h-4 w-4" />
-            <span>Diamondz Chain</span>
+            <span>Diamond zChain</span>
           </div>
         </div>
       </div>
@@ -153,10 +173,33 @@ export default function NftGalleryPage() {
                         </Badge>
                         <span className="text-sm font-medium text-white">{nft.price}</span>
                       </div>
-                      <p className="text-xs text-gray-500">by {nft.creator}</p>
-                      <Button className="w-full mt-3" disabled>
-                        Coming Soon
-                      </Button>
+                      {nft.stakeable && (
+                        <Badge variant="outline" className="text-xs text-green-400 border-green-400 mb-2">
+                          Stakeable for DAO Tokens
+                        </Badge>
+                      )}
+                      <p className="text-xs text-gray-500 mb-3">by {nft.creator}</p>
+
+                      {/* Marketplace and Staking Buttons */}
+                      <div className="space-y-2">
+                        <Button
+                          className="w-full flex items-center gap-2"
+                          onClick={() => handleViewOnMarketplace(nft.marketplaceUrl)}
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                          View on ThirdWeb
+                        </Button>
+                        {nft.stakeable && (
+                          <Button
+                            variant="outline"
+                            className="w-full flex items-center gap-2 bg-transparent"
+                            onClick={() => handleStakeNFT(nft.id)}
+                          >
+                            <Wallet className="h-4 w-4" />
+                            Stake for DAO
+                          </Button>
+                        )}
+                      </div>
                     </div>
                   </Card>
                 ))}
@@ -171,16 +214,57 @@ export default function NftGalleryPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <Card className="p-6 bg-gray-900 border-gray-700">
                 <h4 className="font-semibold text-white mb-2">Diamondz Digital Music</h4>
-                <p className="text-gray-400 text-sm">Exclusive music NFTs with staking rewards</p>
+                <p className="text-gray-400 text-sm mb-3">Exclusive music NFTs with staking rewards</p>
+                <Button
+                  size="sm"
+                  onClick={() =>
+                    handleViewOnMarketplace(
+                      "https://thirdweb.com/diamond-zchain/0x37FFAd37b84d099afb43B6E01038843f26cD9F05",
+                    )
+                  }
+                >
+                  View Collection
+                </Button>
               </Card>
               <Card className="p-6 bg-gray-900 border-gray-700">
                 <h4 className="font-semibold text-white mb-2">Scam Mercenaries</h4>
-                <p className="text-gray-400 text-sm">Game achievement badges and items</p>
+                <p className="text-gray-400 text-sm mb-3">Game achievement badges and items</p>
+                <Button size="sm" disabled>
+                  Coming Soon
+                </Button>
               </Card>
               <Card className="p-6 bg-gray-900 border-gray-700">
                 <h4 className="font-semibold text-white mb-2">40ac RWA</h4>
-                <p className="text-gray-400 text-sm">Real estate tokenization platform</p>
+                <p className="text-gray-400 text-sm mb-3">Real estate tokenization platform</p>
+                <Button size="sm" disabled>
+                  Coming Soon
+                </Button>
               </Card>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "staking" && (
+          <div className="text-center py-8">
+            <h3 className="text-lg font-medium text-white mb-4">NFT Staking for DAO Governance</h3>
+            <div className="max-w-2xl mx-auto text-gray-300 space-y-4">
+              <p>
+                Stake your Diamondz Digital Music NFTs to earn DAO governance tokens and participate in ecosystem
+                decisions.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                <Card className="p-4 bg-gray-900 border-gray-700">
+                  <h4 className="text-white font-medium mb-2">Staking Contract</h4>
+                  <p className="text-sm text-gray-400">0x9d89BCbd1d81413a8f6b15d7aBF8508A8a0F92a6</p>
+                </Card>
+                <Card className="p-4 bg-gray-900 border-gray-700">
+                  <h4 className="text-white font-medium mb-2">DAO Token</h4>
+                  <p className="text-sm text-gray-400">0xBD20960E95673Ff7de09B47cB33581ED2CDc63a9</p>
+                </Card>
+              </div>
+              <Link href="/governance">
+                <Button className="mt-4">Go to DAO Governance</Button>
+              </Link>
             </div>
           </div>
         )}
