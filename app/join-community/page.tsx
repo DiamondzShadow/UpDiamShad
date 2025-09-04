@@ -155,30 +155,37 @@ export default function JoinCommunity() {
             <Button
               variant="outline"
               className="border-gray-700 hover:border-purple-500 bg-transparent"
-              onClick={() => window.open("https://discord.gg/diamondz", "_blank")}
+              onClick={() => window.open("https://discord.gg/jeJfn266Rk", "_blank")}
             >
               Discord
             </Button>
             <Button
               variant="outline"
               className="border-gray-700 hover:border-blue-500 bg-transparent"
-              onClick={() => window.open("https://twitter.com/diamondz_chain", "_blank")}
+              onClick={() => window.open("https://x.com/DiamondzShadoM", "_blank")}
             >
               Twitter
             </Button>
             <Button
               variant="outline"
               className="border-gray-700 hover:border-red-500 bg-transparent"
-              onClick={() => window.open("https://youtube.com/@diamondz_chain", "_blank")}
+              onClick={() => window.open("https://www.youtube.com/@DiamondzChain", "_blank")}
             >
               YouTube
             </Button>
             <Button
               variant="outline"
-              className="border-gray-700 hover:border-green-500 bg-transparent"
-              onClick={() => (window.location.href = "mailto:info@diamondz.io?subject=General Inquiry")}
+              className="border-gray-700 hover:border-orange-500 bg-transparent"
+              onClick={() => window.open("https://t.me/DiamondzShadow", "_blank")}
             >
-              Email Us
+              Telegram
+            </Button>
+            <Button
+              variant="outline"
+              className="border-gray-700 hover:border-green-500 bg-transparent"
+              onClick={() => window.open("https://medium.com/@movies_40054", "_blank")}
+            >
+              Medium
             </Button>
           </div>
         </div>
