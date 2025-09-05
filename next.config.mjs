@@ -15,6 +15,14 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'thirdweb.com',
+        port: '',
+        pathname: '/ipfs/**',
+      },
+    ],
   },
   experimental: {
     webpackBuildWorker: true,
