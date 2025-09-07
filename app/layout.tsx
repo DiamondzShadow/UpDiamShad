@@ -8,7 +8,9 @@ import { ThirdwebProvider } from "thirdweb/react";
 import { createThirdwebClient } from "thirdweb";
 import { AuthProvider } from "@/hooks/useAuth";
 import { NotificationProvider } from "@/hooks/useNotifications";
+import { LoadingProvider } from "@/hooks/useLoading";
 import { NotificationContainer } from "@/components/NotificationContainer";
+import LoadingModal from "@/components/LoadingModal";
 import { useState } from "react";
 import AuthModal from "@/components/AuthModal";
 import WalletManager from "@/components/WalletManager";
@@ -35,16 +37,19 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-black text-white`}>
         <NotificationProvider>
-          <AuthProvider>
-            <ThirdwebProvider client={client}>
-              <AnnouncementBanner />
-              <Navbar />
-              <main>{children}</main>
-              <AuthModal />
-              <WalletManager />
-              <NotificationContainer />
-            </ThirdwebProvider>
-          </AuthProvider>
+          <LoadingProvider>
+            <AuthProvider>
+              <ThirdwebProvider>
+                <AnnouncementBanner />
+                <Navbar />
+                <main>{children}</main>
+                <AuthModal />
+                <WalletManager />
+                <NotificationContainer />
+                <LoadingModal />
+              </ThirdwebProvider>
+            </AuthProvider>
+          </LoadingProvider>
         </NotificationProvider>
       </body>
     </html>

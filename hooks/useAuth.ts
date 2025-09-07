@@ -47,15 +47,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // Manage body scroll when modals are open
   useEffect(() => {
+    const body = document.body;
+    
     if (isAuthModalOpen || isWalletManagerOpen) {
-      document.body.style.overflow = 'hidden';
+      // Store current overflow before changing it
+      const currentOverflow = body.style.overflow;
+      body.setAttribute('data-scroll-locked', currentOverflow || 'auto');
+      body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      // Restore previous overflow from data attribute
+      const storedOverflow = body.getAttribute('data-scroll-locked');
+      body.style.overflow = storedOverflow || 'auto';
+      body.removeAttribute('data-scroll-locked');
     }
     
-    // Cleanup function
+    // Cleanup function - ensure scroll is always restored on unmount
     return () => {
-      document.body.style.overflow = 'unset';
+      if (body.getAttribute('data-scroll-locked')) {
+        const storedOverflow = body.getAttribute('data-scroll-locked');
+        body.style.overflow = storedOverflow || 'auto';
+        body.removeAttribute('data-scroll-locked');
+      }
     };
   }, [isAuthModalOpen, isWalletManagerOpen]);
 

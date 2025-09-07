@@ -19,12 +19,9 @@ import {
 import { ConnectButton } from "thirdweb/react";
 import { client } from "@/lib/contracts";
 import { useAuth } from "@/hooks/useAuth";
+import { useLoading } from "@/hooks/useLoading";
 import { formatUserDisplayName, getUserVerificationBadge } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-} from "@/components/ui/dialog";
 
 export default function Navbar() {
   const router = useRouter();
@@ -35,9 +32,9 @@ export default function Navbar() {
     setIsAuthModalOpen,
     setIsWalletManagerOpen,
   } = useAuth();
+  const { setLoading } = useLoading();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const [isDashboardLoading, setIsDashboardLoading] = useState(false);
 
   // Manage body scroll when user menu is open
   useEffect(() => {
@@ -54,15 +51,19 @@ export default function Navbar() {
   }, [isUserMenuOpen]);
 
   const handleDashboardNavigation = async () => {
-    setIsDashboardLoading(true);
+    setLoading(
+      true,
+      "Preparing your creator experience...",
+      "Loading Dashboard"
+    );
     setIsUserMenuOpen(false);
-    
+
     try {
-      await router.push('/dashboard');
+      await router.push("/dashboard");
     } finally {
       // Keep loading for a brief moment to show the modal
       setTimeout(() => {
-        setIsDashboardLoading(false);
+        setLoading(false);
       }, 500);
     }
   };
@@ -73,9 +74,9 @@ export default function Navbar() {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link href="/" className="flex-shrink-0 flex items-center">
-              <div className="relative h-12 w-48 mr-2">
+              <div className="relative h-12 w-auto md:w-48 mr-2">
                 <Image
-                  src="https://i.ibb.co/kVSYnmNL/can-you-make-this-a-black-and-white-logo-like-a-blockchain-logo-and-add-the-words-diamondzchain-wri.png"
+                  src="/nft7.jpg"
                   alt="Diamondz Shadow Logo"
                   fill
                   className="object-contain"
@@ -297,19 +298,6 @@ export default function Navbar() {
           </div>
         </div>
       )}
-
-      {/* Dashboard Loading Modal */}
-      <Dialog open={isDashboardLoading} onOpenChange={() => {}}>
-        <DialogContent className="bg-black border-gray-800 text-white max-w-sm">
-          <div className="flex flex-col items-center justify-center py-8">
-            <Loader2 className="h-12 w-12 text-purple-400 animate-spin mb-4" />
-            <h3 className="text-lg font-semibold mb-2">Loading Dashboard</h3>
-            <p className="text-gray-400 text-center text-sm">
-              Preparing your creator experience...
-            </p>
-          </div>
-        </DialogContent>
-      </Dialog>
     </nav>
   );
 }

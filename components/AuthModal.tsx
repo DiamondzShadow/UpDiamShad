@@ -80,12 +80,13 @@ export function AuthModal() {
 
   if (authFlow === "signup") {
     return (
-      <Dialog open={isAuthModalOpen} onOpenChange={handleClose}>
+      <Dialog open={isAuthModalOpen} onOpenChange={() => {}} modal>
         <DialogContent className="bg-black border-gray-800 text-white max-w-md">
           <SignupFlow
             onBack={() => setAuthFlow("entry")}
             onSuccess={handleAuthSuccess}
             onSwitchToLogin={() => setAuthFlow("login")}
+            onClose={handleClose}
           />
         </DialogContent>
       </Dialog>
@@ -94,12 +95,13 @@ export function AuthModal() {
 
   if (authFlow === "login") {
     return (
-      <Dialog open={isAuthModalOpen} onOpenChange={handleClose}>
+      <Dialog open={isAuthModalOpen} onOpenChange={() => {}} modal>
         <DialogContent className="bg-black border-gray-800 text-white max-w-md">
           <LoginFlow
             onBack={() => setAuthFlow("entry")}
             onSuccess={handleAuthSuccess}
             onSwitchToSignup={() => setAuthFlow("signup")}
+            onClose={handleClose}
           />
         </DialogContent>
       </Dialog>

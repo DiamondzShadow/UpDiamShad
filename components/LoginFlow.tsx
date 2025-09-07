@@ -20,12 +20,13 @@ interface LoginFlowProps {
   onBack: () => void;
   onSuccess: () => void;
   onSwitchToSignup?: () => void;
+  onClose?: () => void;
 }
 
 type LoginMethod = 'email' | 'wallet';
 type FlowStep = 'method-select' | 'email-form' | 'wallet-connect';
 
-export function LoginFlow({ onBack, onSuccess, onSwitchToSignup }: LoginFlowProps) {
+export function LoginFlow({ onBack, onSuccess, onSwitchToSignup, onClose }: LoginFlowProps) {
   const [step, setStep] = useState<FlowStep>('method-select');
   const [selectedMethod, setSelectedMethod] = useState<LoginMethod | null>(null);
   const [showPassword, setShowPassword] = useState(false);
@@ -76,14 +77,25 @@ export function LoginFlow({ onBack, onSuccess, onSwitchToSignup }: LoginFlowProp
   if (step === 'method-select') {
     return (
       <div className="space-y-6">
-        <div className="flex items-center gap-3 mb-6">
-          <button
-            onClick={onBack}
-            className="text-gray-400 hover:text-white transition-colors"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </button>
-          <h3 className="text-lg font-medium text-white">Sign In</h3>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={onBack}
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </button>
+            <h3 className="text-lg font-medium text-white">Sign In</h3>
+          </div>
+          {onClose && (
+            <button
+              onClick={onClose}
+              className="text-gray-400 hover:text-white transition-colors text-xl"
+              title="Close"
+            >
+              ×
+            </button>
+          )}
         </div>
 
         <p className="text-gray-400 text-sm">
@@ -139,14 +151,25 @@ export function LoginFlow({ onBack, onSuccess, onSwitchToSignup }: LoginFlowProp
   if (step === 'email-form') {
     return (
       <div className="space-y-6">
-        <div className="flex items-center gap-3 mb-6">
-          <button
-            onClick={() => setStep('method-select')}
-            className="text-gray-400 hover:text-white transition-colors"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </button>
-          <h3 className="text-lg font-medium text-white">Sign In</h3>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setStep('method-select')}
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </button>
+            <h3 className="text-lg font-medium text-white">Sign In</h3>
+          </div>
+          {onClose && (
+            <button
+              onClick={onClose}
+              className="text-gray-400 hover:text-white transition-colors text-xl"
+              title="Close"
+            >
+              ×
+            </button>
+          )}
         </div>
 
         <form onSubmit={handleEmailSubmit} className="space-y-4">

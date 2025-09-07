@@ -63,13 +63,14 @@ export interface WavzProfile {
 // InsightIQ integration interface (matching backend)
 export interface InsightIQIntegration {
   userId: string | null;
-  apiKey: string | null;
+  external_id: string | null;
   sdkToken: string | null;
+  tokenExpiresAt: Date | null;
   isConnected: boolean;
   connectedAt: Date | null;
   connectedAccounts: {
     accountId: string;
-    platform: "youtube" | "tiktok" | "instagram" | "twitter";
+    platform: "youtube" | "tiktok" | "instagram" | "twitter" | "twitch";
     username: string;
     displayName?: string;
     profilePicture?: string;

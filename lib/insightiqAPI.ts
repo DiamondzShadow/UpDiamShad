@@ -4,7 +4,7 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:30
 
 export interface ConnectedAccount {
   accountId: string;
-  platform: 'youtube' | 'tiktok' | 'instagram' | 'twitter';
+  platform: 'youtube' | 'tiktok' | 'instagram' | 'twitter' | 'twitch';
   username: string;
   displayName?: string;
   profilePicture?: string;
@@ -44,7 +44,8 @@ export interface SDKTokenResponse {
   data?: {
     sdk_token: string;
     user_id: string;
-    expires_in: number;
+    expires_at: string;
+    is_cached?: boolean;
   };
   error?: string;
 }
