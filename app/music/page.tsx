@@ -25,7 +25,7 @@ function MusicNFTCard({
     <div className="bg-gray-900 border border-gray-800 rounded-lg p-6 hover:border-purple-500 transition-colors">
       <div className="relative mb-4">
         <img
-          src={nft.image || "/placeholder.svg"}
+          src={nft.image || "/abstract-music-album-cover-purple.png"}
           alt={nft.title}
           className="w-full h-48 object-cover rounded-lg bg-gradient-to-br from-purple-900 to-blue-900"
         />
