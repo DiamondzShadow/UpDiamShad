@@ -1,11 +1,11 @@
 import { streamText } from "ai"
-import { thirdweb } from "@thirdweb-dev/ai-sdk-provider"
+import { createThirdwebAI } from "@thirdweb-dev/ai-sdk-provider"
 
 export async function POST(req: Request) {
   const { messages } = await req.json()
 
   const result = await streamText({
-    model: thirdweb({
+    model: createThirdwebAI({
       clientId: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID!,
       // Enable blockchain tools for DAO interactions
       tools: ["sign_transaction", "sign_swap", "wallet_analysis"],
