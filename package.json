@@ -74,12 +74,13 @@
     "sonner": "latest",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
-    "thirdweb": "latest",
+    "thirdweb": "^5.105.0",
     "vaul": "latest",
     "viem": "^2.21.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "pino-pretty": "^13.1.1",
     "@types/node": "^22",
     "@types/react": "^18",
     "@types/react-dom": "^18",
