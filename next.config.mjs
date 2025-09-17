@@ -47,9 +47,37 @@ const nextConfig = {
       },
     });
 
+    // Ensure ESM modules are handled correctly
+    config.experiments = {
+      ...config.experiments,
+      asyncWebAssembly: true,
+      layers: true,
+    };
+    
+    // Handle module resolution for thirdweb
+    if (!isServer) {
+      // Ensure thirdweb modules are properly resolved
+      config.resolve = {
+        ...config.resolve,
+        extensionAlias: {
+          '.js': ['.js', '.ts', '.tsx', '.jsx'],
+          '.mjs': ['.mjs', '.mts'],
+          '.cjs': ['.cjs', '.cts']
+        }
+      };
+    }
+
     return config;
   },
-  transpilePackages: ['thirdweb', '@thirdweb-dev/ai-sdk-provider'],
+  transpilePackages: [
+    'thirdweb', 
+    '@thirdweb-dev/ai-sdk-provider',
+    'thirdweb/react',
+    'thirdweb/extensions',
+    'thirdweb/wallets',
+    'thirdweb/utils',
+    'thirdweb/storage'
+  ],
 }
 
 mergeConfig(nextConfig, userConfig)
