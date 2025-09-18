@@ -24,7 +24,11 @@ function MusicNFTCard({
   return (
     <div className="bg-gray-900 border border-gray-800 rounded-lg p-6 hover:border-purple-500 transition-colors">
       <div className="relative mb-4">
-        <img src={nft.image || "/placeholder.svg"} alt={nft.title} className="w-full h-48 object-cover rounded-lg" />
+        <img
+          src={nft.image || "/abstract-music-album-cover-purple.png"}
+          alt={nft.title}
+          className="w-full h-48 object-cover rounded-lg bg-gradient-to-br from-purple-900 to-blue-900"
+        />
         <button
           onClick={() => onPlay(nft.id)}
           className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 hover:opacity-100 transition-opacity rounded-lg"
@@ -61,7 +65,7 @@ export default function MusicMarketplace() {
       title: "Digital Dreams",
       artist: "CryptoBeats",
       price: "150",
-      image: "/placeholder-bhped.png",
+      image: "/abstract-music-album-cover-purple.png",
       duration: "3:42",
       genre: "Electronic",
     },
@@ -70,7 +74,7 @@ export default function MusicMarketplace() {
       title: "Blockchain Symphony",
       artist: "DecentralizedSound",
       price: "200",
-      image: "/placeholder-mby3b.png",
+      image: "/abstract-music-album-cover-purple.png",
       duration: "4:15",
       genre: "Ambient",
     },
@@ -79,7 +83,7 @@ export default function MusicMarketplace() {
       title: "NFT Anthem",
       artist: "TokenTunes",
       price: "175",
-      image: "/placeholder-rq6cn.png",
+      image: "/abstract-music-album-cover-purple.png",
       duration: "3:28",
       genre: "Pop",
     },
@@ -97,7 +101,7 @@ export default function MusicMarketplace() {
       title: "DAO Beats",
       artist: "GovernanceGroove",
       price: "180",
-      image: "/placeholder-1rk1t.png",
+      image: "/abstract-music-album-cover-purple.png",
       duration: "3:55",
       genre: "Hip-Hop",
     },
@@ -106,7 +110,7 @@ export default function MusicMarketplace() {
       title: "Smart Contract Sounds",
       artist: "CodeComposer",
       price: "195",
-      image: "/placeholder-9z127.png",
+      image: "/abstract-music-album-cover-purple.png",
       duration: "4:22",
       genre: "Techno",
     },

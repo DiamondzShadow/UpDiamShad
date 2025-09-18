@@ -27,8 +27,8 @@ export function ContractInteraction({ title, description, address, explorerUrl }
   }
 
   const handleInteract = () => {
-    // Placeholder for contract interaction
     console.log(`Interacting with ${title} contract at ${address}`)
+    alert(`Contract interaction initiated for ${title}`)
   }
 
   return (

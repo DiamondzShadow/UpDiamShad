@@ -5,7 +5,7 @@ import { createThirdwebClient, getContract, defineChain } from "thirdweb"
 import { ConnectButton, useActiveAccount } from "thirdweb/react"
 
 // === CONFIG ===
-// Your Thirdweb client ID (replace with actual)
+// Your Thirdweb client ID (already configured)
 const client = createThirdwebClient({ clientId: "5a25f41eddec1fb56418abe1ecef5dc2" })
 
 // zsLab Testnet definition
