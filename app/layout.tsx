@@ -4,8 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import AnnouncementBanner from "@/components/announcement-banner";
-import { ThirdwebProvider } from "thirdweb/react";
-import { createThirdwebClient } from "thirdweb";
+import { ThirdwebClientProvider } from "@/components/ThirdwebClientProvider";
 import { AuthProvider } from "@/hooks/useAuth";
 import { NotificationProvider } from "@/hooks/useNotifications";
 import { LoadingProvider } from "@/hooks/useLoading";
@@ -16,10 +15,6 @@ import AuthModal from "@/components/AuthModal";
 import WalletManager from "@/components/WalletManager";
 
 const inter = Inter({ subsets: ["latin"] });
-
-const client = createThirdwebClient({
-  clientId: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID || "demo-client-id",
-});
 
 export const metadata: Metadata = {
   title: "Diamondz Shadow | Web3 Technology",
@@ -39,7 +34,7 @@ export default function RootLayout({
         <NotificationProvider>
           <LoadingProvider>
             <AuthProvider>
-              <ThirdwebProvider>
+              <ThirdwebClientProvider>
                 <AnnouncementBanner />
                 <Navbar />
                 <main>{children}</main>
@@ -47,7 +42,7 @@ export default function RootLayout({
                 <WalletManager />
                 <NotificationContainer />
                 <LoadingModal />
-              </ThirdwebProvider>
+              </ThirdwebClientProvider>
             </AuthProvider>
           </LoadingProvider>
         </NotificationProvider>

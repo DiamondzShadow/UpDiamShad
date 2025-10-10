@@ -194,7 +194,7 @@ export default function GovernancePage() {
                   onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
                 >
                   <img
-                    src={nft.metadata.image || "/placeholder.svg"}
+                    src={nft.metadata.image || "/abstract-music-album-cover-purple.png"}
                     alt={nft.metadata.name}
                     style={{ width: "150px", borderRadius: "8px", marginBottom: "0.5rem" }}
                   />
